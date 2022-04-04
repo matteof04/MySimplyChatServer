@@ -1,3 +1,3 @@
 # MySimplyChatServer
 
-Simple chat application based on Ktor WebSocket tutorial.
+Simple chat server based on Ktor WebSocket tutorial.
