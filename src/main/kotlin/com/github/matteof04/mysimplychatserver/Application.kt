@@ -34,6 +34,12 @@ fun main(args: Array<String>): Unit = io.ktor.server.cio.EngineMain.main(args)
 
 @Suppress("unused")
 fun Application.module() {
+    println("""
+        MySimplyChatServer  Copyright (C) 2022  Matteo Franceschini
+        This program comes with ABSOLUTELY NO WARRANTY.
+        This is free software, and you are welcome to redistribute it
+        under GNU AGPLv3.
+    """.trimIndent())
     val config = HikariConfig("/hikari.properties")
     Database.connect(HikariDataSource(config))
     transaction {
