@@ -18,6 +18,7 @@ import com.github.matteof04.mysimplychatserver.services.UserService
 import io.ktor.http.cio.websocket.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.apache.commons.codec.digest.DigestUtils
 
 object NewUser : Command, KoinComponent {
     override fun getCommandByte(): Byte = 0x06.toByte()
@@ -27,7 +28,7 @@ object NewUser : Command, KoinComponent {
             val userService: UserService by inject()
             val newCredentials = payload.split('~')
             val newUsername = newCredentials[0]
-            val newPassword = newCredentials[1]
+            val newPassword = DigestUtils("SHA3-256").digestAsHex(newCredentials[1])
             if(userService.getUsersByUsername(connection.username)!!.admin){
                 userService.createUser(newUsername, newPassword)
                 connection.session.send("User created successfully with username: $newUsername")
